@@ -1,17 +1,2 @@
 #!/bin/bash
-
-WATER="$WATER"
-STIR="$STIR"
-
-# Remove any non-numeric characters from WATER and STIR
-WATER=$(echo "$WATER" | tr -cd '[:digit:]')
-STIR=$(echo "$STIR" | tr -cd '[:digit:]')
-
-# Convert WATER and STIR to base 10 and perform the addition
-result=$((10#${WATER} + 10#${STIR}))
-
-# Convert the result to base bestchol
-result_base_bestchol=$(echo "obase=bestchol; $result" | bc)
-
-# Print the result
-echo "$result_base_bestchol"
+echo $(printf %o $(($((5#$(echo $WATER | tr 'water' '01234'))) + $((5#$(echo $STIR | tr 'stir. ' '01234'))))) | tr '01234567' 'bestchol')
